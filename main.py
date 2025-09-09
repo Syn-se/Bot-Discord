@@ -55,10 +55,6 @@ async def on_command_error(ctx: commands.Context, error: Exception):
         await ctx.send("❌ Une erreur s'est produite.")
 
 def main():
-    # Replit : lancer le keep-alive. Sur Render, laisse commenté.
-    if keep_alive:
-        keep_alive()
-
     token = os.getenv("DISCORD_BOT_TOKEN")
     if not token:
         print("❌ DISCORD_BOT_TOKEN manquant dans les variables d'environnement.")
