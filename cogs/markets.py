@@ -7,8 +7,8 @@ from utils.checks import only_market_channel
 
 # --- Configuration ---
 
-# Choisis le cluster adapté: "west", "us", "asia"
-API_HOST = "https://west.albion-online-data.com"
+# Choisis le cluster adapté: "west", "us", "asia", "europe"
+API_HOST = "https://europe.albion-online-data.com"
 
 # Villes royales + Brecilien
 ROYAL_CITIES = [
