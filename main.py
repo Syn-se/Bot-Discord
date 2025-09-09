@@ -1,6 +1,7 @@
 import os
 import logging
 import discord
+from http_stub import start_http_stub
 from discord.ext import commands
 
 # === Intents & Help par défaut (sans descriptions d’arguments) ===
@@ -62,7 +63,8 @@ def main():
     if not token:
         print("❌ DISCORD_BOT_TOKEN manquant dans les variables d'environnement.")
         raise SystemExit(1)
-
+        
+    start_http_stub()
     bot.run(token)
 
 if __name__ == "__main__":
