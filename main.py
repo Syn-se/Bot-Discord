@@ -1,5 +1,4 @@
 import os
-import asyncio
 import logging
 import discord
 from discord.ext import commands
@@ -11,6 +10,7 @@ intents.guilds = True
 
 default_help = commands.DefaultHelpCommand()
 default_help.show_parameter_descriptions = False
+default_help.verify_checks = False
 
 bot = commands.Bot(command_prefix="!", intents=intents, help_command=default_help)
 
