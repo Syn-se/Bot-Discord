@@ -23,9 +23,15 @@ log = logging.getLogger("albion-bot")
 @bot.event
 async def setup_hook():
     # Charge les cogs au démarrage
-    await bot.load_extension("cogs.transport")
-    await bot.load_extension("cogs.markets")
-
+    # await bot.load_extension("cogs.transport")
+    # await bot.load_extension("cogs.markets")
+    for ext in ("cogs.transport", "cogs.markets"):
+        try:
+            await bot.load_extension(ext)
+            log.info(f"✅ Loaded {ext}")
+        except Exception as e:
+            log.exception(f"❌ Failed to load {ext}: {e}")
+            
 @bot.event
 async def on_ready():
     log.info(f"{bot.user} s'est connecté à Discord ! (id: {bot.user.id})")
