@@ -3,8 +3,7 @@ import datetime
 import aiohttp
 import discord
 from discord.ext import commands
-
-from utils.checks import only_transport_channel  # retire ce décorateur si tu ne veux pas restreindre le salon
+from utils.checks import only_market_channel
 
 # --- Configuration ---
 
@@ -86,7 +85,7 @@ class Markets(commands.Cog):
         ),
         aliases=["bp", "best"]
     )
-    @only_transport_channel()
+    @only_market_channel()
     async def bestprice(self, ctx: commands.Context, item_or_base: str, tier: int, qualite: int):
         """
         Règle:
