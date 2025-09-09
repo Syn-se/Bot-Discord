@@ -16,13 +16,13 @@ WEAPON_FAMILIES = {
     "crossbows":         "Arbalètes",
     "daggers":           "Dagues",
     "hammers":           "Marteaux",
-    "quarterstaves":     "Long bâton",
-    "fire_staffs":       "Bâtons de feu",
-    "frost_staffs":      "Bâtons de glace",
-    "cursed_staffs":     "Bâtons maudits",
-    "holy_staffs":       "Bâtons bénis",
-    "arcane_staffs":     "Bâtons des arcanes",
-    "nature_staffs":     "Bâtons de nature",
+    "quarterstaff":      "Long bâton",
+    "fire_staffs":       "Pyromancien",
+    "frost_staffs":      "Mage de givre",
+    "cursed_staffs":     "Sorcier",
+    "holy_staffs":       "Prêtre",
+    "arcane_staffs":     "Arcaniste",
+    "nature_staffs":     "Bâton naturel",
 }
 
 # Mains droites (off-hands)
@@ -165,60 +165,104 @@ CURSED_STAFFS = [
 ]
 
 HOLY_STAFFS = [
-    ("HOLYSTAFF",        "Holy Staff",        "Bâton sacré"),
-    ("GREATHOLYSTAFF",   "Great Holy Staff",  "Grand bâton sacré"),
-    ("DIVINESTAFF",      "Divine Staff",      "Bâton divin"),
-    ("FALLENSTAFF",      "Fallen Staff",      "Bâton déchu"),
-    ("LIFETOUCHSTAFF",   "Lifetouch Staff",   "Bâton du toucher de vie"),
-    ("REDEEMER",         "Redemption Staff",  "Bâton de rédemption"),
+    ("HOLYSTAFF",        "Bâton béni"),
+    ("GREATHOLYSTAFF",   "Grand bâton béni"),
+    ("DIVINESTAFF",      "Bâton divin"),
+    ("FALLENSTAFF",      "Bâton déchu"),
+    ("LIFETOUCHSTAFF",   "Bâton du toucher de vie"),
+    ("RDEMPTIONSTAFF",   "Bâton de rédemption"),
+    ("HALLOWFALL",       "Sanctificateur"),
+    ("EXALTEDSTAFF",     "Bâton exalté"),
 ]
 
 ARCANE_STAFFS = [
-    ("ARCANESTAFF",       "Arcane Staff",        "Bâton des arcanes"),
-    ("GREATARCANESTAFF",  "Great Arcane Staff",  "Grand bâton des arcanes"),
-    ("ENIGMATICSTAFF",    "Enigmatic Staff",     "Bâton énigmatique"),
-    ("OCCULTSTAFF",       "Occult Staff",        "Bâton occulte"),
-    ("WITCHWORKSTAFF",    "Witchwork Staff",     "Bâton de sorcellerie"),
-    ("ECLIPSESTAFF",      "Evensong / Eclipse",  "Chant du soir / Éclipse"),
+    ("ARCANESTAFF",       "Bâton esotérique"),
+    ("GREATARCANESTAFF",  "Grand bâton esotérique"),
+    ("ENIGMATICSTAFF",    "Bâton énigmatique"),
+    ("OCCULTSTAFF",       "Bâton occulte"),
+    ("WITCHWORKSTAFF",    "Bâton de sorcellerie"),
+    ("MALEVOLENTLOCUS",   "Locus malveillant"),
+    ("EVENSONG",          "Cercle vesperien"),
+    ("ASTRALSTAFF",       "Bâton astral"),
 ]
 
 NATURE_STAFFS = [
-    ("NATURESTAFF",       "Nature Staff",        "Bâton de nature"),
-    ("GREATNATURESTAFF",  "Great Nature Staff",  "Grand bâton de nature"),
-    ("DRUIDICSTAFF",      "Druidic Staff",       "Bâton druidique"),
-    ("BLIGHTSTAFF",       "Blight Staff",        "Bâton de fléau"),
-    ("WILDSTAFF",         "Wild Staff",          "Bâton sauvage"),
-    ("IRONROOTSTAFF",     "Ironroot Staff",      "Bâton racine de fer"),
+    ("NATURESTAFF",       "Bâton naturel"),
+    ("GREATNATURESTAFF",  "Grand bâton naturel"),
+    ("DRUIDICSTAFF",      "Bâton druidique"),
+    ("BLIGHTSTAFF",       "Bâton de fléau"),
+    ("WILDSTAFF",         "Bâton sauvage"),
+    ("RAMPANTSTAFF",      "Bâton souchefer"),
+    ("RAMPANTSTAFF",      "Bâton effréné"),
+    ("FORGEBARKSTAFF",    "Bâton de forgécorce"),
 ]
 
-# Mains droites (off-hands) — très utilisées
-OFFHANDS = [
-    ("TORCH",           "Torch",              "Torche"),
-    ("BOOK",            "Tome of Spells",     "Tome de sorts"),
-    ("SHIELD",          "Shield",             "Bouclier"),
-    ("MISTCALLER",      "Mistcaller",         "Appel des brumes"),
-    ("LEERINGCANE",     "Leering Cane",       "Canne narquoise"),
-    ("EYEOFSECRETS",    "Eye of Secrets",     "Œil des secrets"),
-    ("MUISAK",          "Muisak",             "Muisak"),
-    ("TAPROOT",         "Taproot",            "Racine pivot"),
-    ("CELESTIALCENSER", "Celestial Censer",   "Encensoir céleste"),
+SHAPESHIFTER_STAFF = [
+    ("PROWLINGSTAFF",       "Bâton rôdeur"),
+    ("ROOTBOUNDSTAFF",      "Bâton enraciné"),
+    ("PRIMALSTAFF",         "Bâton primitif"),
+    ("DLOODMOONSTAFF",      "Bâton de lune de sang"),
+    ("HELLSPAWNSTAFF",      "Bâton de créature infernale"),
+    ("EARTHRUNESTAFF",      "Bâton de terre-rune"),
+    ("LIGHTCALLER",         "Mande-lumière"),
+    ("STILLGAZESTAFF",      "Bâton de regard figé"),
+]
+
+WAR_GLOVES = [
+    ("BRAWLERGLOVES",       "Gantelets de bagarreur"),
+    ("BATTLEBRACERS",       "Gantelets de bataille"),
+    ("SPIKEDGAUNTLETS",     "Gantelets à pointe"),
+    ("URSINEMAULERS",       "Poignes ursines"),
+    ("HELLFIRE",            "Mains infernales"),
+    ("RAVENSTRIKECESTUS",   "Cestes-des-freux"),
+    ("FISTSOFAVALON",       "Poings d'Avalon"),
+    ("FORCEPULES BRACERS",  "Brassards d'Impulsion de force"),
+]
+
+# Mains droites (off-hands)
+OFFHANDS_TORCH = [
+    ("TORCH",           "Torche"),
+    ("MISTCALLER",      "Mandebrume"),
+    ("LEERINGCANE",     "Canne grimaçante"),
+    ("CRYPTCANDLE",     "Bougie de la crypte"),
+    ("SACREDSCEPTER",   "Sceptre sacré"),
+    ("BLUEFLAMETORCH",  "Toche Flammebleue céleste"),
+]
+
+OFFHANDS_MAGE = [
+    ("TOMEOFSPELLS",        "Tome de sorts"),
+    ("EYEOFSECRETS",        "Œil des secrets"),
+    ("MUISAK",              "Miniaturisé"),
+    ("TAPROOT",             "Racine pivot"),
+    ("CELESTIALCENSER",     "Encens céleste"),
+    ("TIMELOCKEDGRIMOIRE",  "Grimoire Chronostatique"),
+
+]
+
+OFFHANDS_SHIELD = [
+    ("SHIELD",          "Bouclier"),
+    ("SARCOPHAGUS",     "Sarcophage"),
+    ("CAITIFFSHIELD",   "Bouclier de scélérat"),
+    ("FACEBREAKER",     "Brise-face"),
+    ("ASTRALAEGIS",     "Egide astrale"),
+    ("UNBREAKABLEWARD", "Barrière incassable"),
 ]
 
 # Ressources (gros niveaux)
 RESOURCES_OVERVIEW = [
-    ("WOOD",   "Wood",      "Bois"),
-    ("ORE",    "Ore",       "Minerai"),
-    ("FIBER",  "Fiber",     "Fibre"),
-    ("HIDE",   "Hide",      "Cuir brut"),
-    ("STONE",  "Stone",     "Pierre"),
+    ("WOOD",   "Bois"),
+    ("ORE",    "Minerai"),
+    ("FIBER",  "Fibre"),
+    ("HIDE",   "Cuir brut"),
+    ("STONE",  "Pierre"),
 ]
 
 # Détails simples par ressource (base token -> FR)
-WOOD = [("WOOD", "Wood", "Bois"), ("PLANKS", "Planks", "Planches")]
-ORE  = [("ORE", "Ore", "Minerai"), ("METALBAR", "Metal Bar", "Lingots")]
-FIBER= [("FIBER", "Fiber", "Fibre"), ("CLOTH", "Cloth", "Tissu")]
-HIDE = [("HIDE", "Hide", "Peaux"), ("LEATHER", "Leather", "Cuir")]
-STONE= [("STONE", "Stone", "Pierre"), ("STONEBLOCK", "Stone Block", "Bloc de pierre")]
+WOOD = [("WOOD", "Bois"), ("PLANKS",          "Planches")]
+ORE  = [("ORE",  "Minerai"), ("METALBAR",     "Lingots")]
+FIBER= [("FIBER", "Fibre"), ("CLOTH",         "Tissu")]
+HIDE = [("HIDE",  "Peaux"), ("LEATHER",       "Cuir")]
+STONE= [("STONE", "Pierre"), ("STONEBLOCK",   "Bloc de pierre")]
 
 QUALITY_MAP = [
     (1, "Normal"),
