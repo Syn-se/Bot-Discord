@@ -28,18 +28,27 @@ BLACK_MARKET = "Black Market"
 HTTP_TIMEOUT = 15
 
 
-def _normalize_item_id(maybe_base_or_full: str, tier: int | None) -> str:
+def _normalize_item_id(maybe_base_or_full: str, tier: int | None, enchant: int | None = 0) -> str:
     """
-    Si l'utilisateur passe 'T5_BOW' -> on garde.
-    Si l'utilisateur passe 'BOW' + tier=5 -> on construit 'T5_BOW'.
+    Construit l'ITEM_ID:
+      - Si 'T5_BOW' est passé, on garde et on ajoute @enchant si > 0.
+      - Si 'BOW' + tier=5, construit 'T5_BOW' (+ @enchant si > 0).
     """
     s = (maybe_base_or_full or "").strip().upper()
+
+    # Nettoyage basique
     if s.startswith("T") and "_" in s:
-        return s  # déjà un ITEM_ID complet
-    if not tier:
-        # Pas de tier fourni et pas d'item complet -> on lève une ValueError
-        raise ValueError("ITEM incomplet. Fournis soit un ITEM_ID complet (ex: T5_BOW), soit BASE_ID + TIER.")
-    return f"T{int(tier)}_{s}"
+        base = s  # déjà complet
+    else:
+        if not tier:
+            raise ValueError("ITEM incomplet. Fournis soit un ITEM_ID complet (ex: T5_BOW), soit BASE_ID + TIER.")
+        base = f"T{int(tier)}_{s}"
+
+    # Ajout enchant si demandé
+    if enchant and int(enchant) > 0:
+        base = f"{base}@{int(enchant)}"
+
+    return base
 
 
 def _fmt_silver(v: int | float | None) -> str:
@@ -78,15 +87,17 @@ class Markets(commands.Cog):
         name="bestprice",
         help=(
             "Compare le meilleur prix entre le Black Market et les HDV (royales + Brecilien) pour un item.\n"
-            "Syntaxe : !bestprice <ITEM_ID|BASE_ID> <TIER> <QUALITE>\n"
-            "  • ITEM_ID complet (ex: T5_BOW) : !bestprice T5_BOW 5 1\n"
-            "  • BASE_ID + TIER (ex: BOW 5 1) : !bestprice BOW 5 1\n"
+            "Syntaxe : !bestprice <ITEM_ID|BASE_ID> <TIER 1-8> <ENCHANT 0-4> <QUALITE 1-5>.\n"
+            "Exemples :\n"
+            "!bestprice T5_BOW 5 0 1"
+            "!bestprice BOW 6 2 3"
             "Qualité : 1=Normal, 2=Bon, 3=Exceptionnel, 4=Remarquable, 5=Chef-d’œuvre"
-        ),
+            ),
         aliases=["bp", "best"]
     )
+    
     @only_market_channel()
-    async def bestprice(self, ctx: commands.Context, item_or_base: str, tier: int, qualite: int):
+    async def bestprice(self, ctx: commands.Context, item_or_base: str, tier: int, enchant: int, qualite: int):
         """
         Règle:
         - Black Market: on regarde le meilleur prix d'achat (buy_price_max) -> c'est ce que le BM te paiera.
@@ -94,12 +105,21 @@ class Markets(commands.Cog):
         On renvoie le meilleur prix et l'emplacement gagnant.
         """
         # Validation simple
-        if qualite < 1 or qualite > 5:
-            await ctx.send("❌ Qualité invalide. Utilise un entier entre 1 et 5.")
+        if not (1 <= tier <= 8):
+            await ctx.send("❌ Tiers invalide. Utilise un entier **1 à 8**.")
+        return
+
+        # NB: permettre 0 (non-enchanté) jusqu’à 4 (si dispo côté jeu)
+        if not (0 <= enchant <= 4):
+            await ctx.send("❌ Enchantement invalide. Utilise un entier **0 à 4** (0 = non-enchanté).")
             return
 
+        if not (1 <= qualite <= 5):
+            await ctx.send("❌ Qualité invalide. Utilise un entier **1 à 5** (5 = Chef-d’œuvre).")
+            return
+        
         try:
-            item_id = _normalize_item_id(item_or_base, tier)
+            item_id = _normalize_item_id(item_or_base, tier, enchant)
         except ValueError as e:
             await ctx.send(f"❌ {e}")
             return
