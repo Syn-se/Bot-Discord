@@ -23,6 +23,7 @@ log = logging.getLogger("albion-bot")
 async def setup_hook():
     # Charge les cogs au démarrage
     await bot.load_extension("cogs.transport")
+    await bot.load_extension("cogs.markets")
 
 @bot.event
 async def on_ready():
@@ -31,17 +32,19 @@ async def on_ready():
 
 # === Filtrage global des commandes par salon/catégorie ===
 # (Si tu as aussi un décorateur par commande, tu peux garder les deux.)
-from utils.checks import in_allowed_channel, COMMAND_PREFIX
+from utils.checks import in_allowed_channel, in_market_channel, COMMAND_PREFIX
 
 @bot.event
 async def on_message(message: discord.Message):
     if message.author == bot.user:
         return
-    if message.content.startswith(COMMAND_PREFIX) and not in_allowed_channel(message.channel):
-        await message.channel.send(
-            "🔒 Les commandes de transport sont réservées au salon autorisé de la catégorie Transport."
-        )
-        return
+    if message.content.startswith(COMMAND_PREFIX):
+        if not (in_allowed_channel(message.channel) or in_market_channel(message.channel)):
+            await message.channel.send(
+                "🔒 Commandes autorisées uniquement dans "
+                "**Transport > #test-bot-transport** ou **Economie > #bot-commerce**."
+            )
+            return
     await bot.process_commands(message)
 
 @bot.event
