@@ -47,7 +47,7 @@ def _match_names(channel: discord.abc.GuildChannel, chan_name: str, cat_name: st
         return False
 
 # ---------- Transport ----------
-def in_allowed_channel(channel: discord.abc.GuildChannel) -> bool:
+def in_transport_channel(channel: discord.abc.GuildChannel) -> bool:
     # Priorité aux IDs si fournis
     if _match_ids(channel, TRANSPORT_CHANNEL_ID, TRANSPORT_CATEGORY_ID):
         return True
@@ -55,15 +55,9 @@ def in_allowed_channel(channel: discord.abc.GuildChannel) -> bool:
     return _match_names(channel, TRANSPORT_CHANNEL_NAME, TRANSPORT_CATEGORY_NAME)
 
 def only_transport_channel():
-    """Check: n’autorise la commande que dans Transport/test-bot-transport (ou IDs configurés)."""
+    """Check silencieux: n’autorise que dans la zone Transport; ne parle pas tout seul."""
     async def predicate(ctx: commands.Context):
-        if in_allowed_channel(ctx.channel):
-            return True
-        await ctx.send(
-            f"🔒 Cette commande n'est autorisée que dans **#{TRANSPORT_CHANNEL_NAME}** "
-            f"de la catégorie **{TRANSPORT_CATEGORY_NAME}**."
-        )
-        return False
+        return in_transport_channel(ctx.channel)  # <-- plus de ctx.send ici
     return commands.check(predicate)
 
 # ---------- Marché / Économie ----------
@@ -73,13 +67,7 @@ def in_market_channel(channel: discord.abc.GuildChannel) -> bool:
     return _match_names(channel, MARKET_CHANNEL_NAME, MARKET_CATEGORY_NAME)
 
 def only_market_channel():
-    """Check: n’autorise la commande que dans Economie/bot-commerce (ou IDs configurés)."""
+    """Check silencieux: n’autorise que dans la zone Économie; ne parle pas tout seul."""
     async def predicate(ctx: commands.Context):
-        if in_market_channel(ctx.channel):
-            return True
-        await ctx.send(
-            f"🔒 Commande réservée à **#{MARKET_CHANNEL_NAME}** "
-            f"dans **{MARKET_CATEGORY_NAME}**."
-        )
-        return False
+        return in_market_channel(ctx.channel)  # <-- plus de ctx.send ici
     return commands.check(predicate)
