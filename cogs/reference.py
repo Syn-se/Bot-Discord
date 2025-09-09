@@ -192,7 +192,7 @@ NATURE_STAFFS = [
     ("DRUIDICSTAFF",      "Bâton druidique"),
     ("BLIGHTSTAFF",       "Bâton de fléau"),
     ("WILDSTAFF",         "Bâton sauvage"),
-    ("RAMPANTSTAFF",      "Bâton souchefer"),
+    ("IRONROOTSTAFF",     "Bâton souchefer"),
     ("RAMPANTSTAFF",      "Bâton effréné"),
     ("FORGEBARKSTAFF",    "Bâton de forgécorce"),
 ]
