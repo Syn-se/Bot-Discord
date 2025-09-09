@@ -6,7 +6,133 @@ from utils.checks import only_market_channel
 # Données de référence (tokens = base pour ITEM_ID ex: T5_<TOKEN>@2)
 # ===========================================================
 
+# ===========================================================
+# Familles d’équipements (9 groupes)
+# ===========================================================
+EQUIP_FAMILIES = [
+    ("tête cuir",   "Head Leather"),
+    ("tête tissu",  "Head Cloth"),
+    ("tête plaque", "Head Plate"),
+    ("armure cuir",   "Armor Leather"),
+    ("armure tissu",  "Armor Cloth"),
+    ("armure plaque", "Armor Plate"),
+    ("pieds cuir",   "Shoes Leather"),
+    ("pieds tissu",  "Shoes Cloth"),
+    ("pieds plaque", "Shoes Plate"),
+]
+
+# =========================
+# LEATHER (cuir)
+# =========================
+HEAD_LEATHER = [
+    ("HEAD_LEATHER_SET1",   "Mercenary Hood",      "Capuche de mercenaire"),
+    ("HEAD_LEATHER_SET2",   "Hunter Hood",         "Capuche de chasseur"),
+    ("HEAD_LEATHER_SET3",   "Assassin Hood",       "Capuche d’assassin"),
+    ("HEAD_LEATHER_MORGANA","Stalker Hood",        "Capuche de traqueur"),
+    ("HEAD_LEATHER_UNDEAD", "Specter Hood",        "Capuche de spectre"),
+    ("HEAD_LEATHER_HELL",   "Hellion Hood",        "Capuche d’hellion"),
+    ("HEAD_LEATHER_ROYAL",  "Royal Hood",          "Capuche royale"),
+    ("HEAD_LEATHER_FEY",    "Mistwalker Hood",     "Capuche de marchebrume"),
+]
+
+ARMOR_LEATHER = [
+    ("ARMOR_LEATHER_SET1",   "Mercenary Jacket",     "Veste de mercenaire"),
+    ("ARMOR_LEATHER_SET2",   "Hunter Jacket",        "Veste de chasseur"),
+    ("ARMOR_LEATHER_SET3",   "Assassin Jacket",      "Veste d’assassin"),
+    ("ARMOR_LEATHER_MORGANA","Stalker Jacket",       "Veste de traqueur"),
+    ("ARMOR_LEATHER_UNDEAD", "Specter Jacket",       "Veste de spectre"),
+    ("ARMOR_LEATHER_HELL",   "Hellion Jacket",       "Veste d’hellion"),
+    ("ARMOR_LEATHER_ROYAL",  "Royal Jacket",         "Veste royale"),
+    ("ARMOR_LEATHER_FEY",    "Mistwalker Jacket",    "Veste de marchebrume"),
+]
+
+SHOES_LEATHER = [
+    ("SHOES_LEATHER_SET1",   "Mercenary Shoes",      "Chaussures de mercenaire"),
+    ("SHOES_LEATHER_SET2",   "Hunter Shoes",         "Bottes de chasseur"),
+    ("SHOES_LEATHER_SET3",   "Assassin Shoes",       "Chaussures d’assassin"),
+    ("SHOES_LEATHER_MORGANA","Stalker Shoes",        "Chaussures de traqueur"),
+    ("SHOES_LEATHER_UNDEAD", "Specter Shoes",        "Chaussures de spectre"),
+    ("SHOES_LEATHER_HELL",   "Hellion Shoes",        "Chaussures d’hellion"),
+    ("SHOES_LEATHER_ROYAL",  "Royal Shoes",          "Chaussures royales"),
+    ("SHOES_LEATHER_FEY",    "Mistwalker Shoes",     "Chaussures de marchebrume"),
+]
+
+# =========================
+# CLOTH (tissu)
+# =========================
+HEAD_CLOTH = [
+    ("HEAD_CLOTH_SET1",    "Scholar Cowl",     "Capuche de savant"),
+    ("HEAD_CLOTH_SET2",    "Cleric Cowl",      "Capuche de clerc"),
+    ("HEAD_CLOTH_SET3",    "Mage Cowl",        "Capuche de mage"),
+    ("HEAD_CLOTH_MORGANA", "Cultist Cowl",     "Capuche de cultiste"),
+    ("HEAD_CLOTH_HELL",    "Fiend Cowl",       "Capuche du malfaisant"),
+    ("HEAD_CLOTH_KEEPER",  "Druid Cowl",       "Capuche de druide"),
+    ("HEAD_CLOTH_AVALON",  "Cowl of Purity",   "Capuche de pureté"),
+    ("HEAD_CLOTH_ROYAL",   "Royal Cowl",       "Capuche royale"),
+]
+
+ARMOR_CLOTH = [
+    ("ARMOR_CLOTH_SET1",    "Scholar Robe",    "Robe de savant"),
+    ("ARMOR_CLOTH_SET2",    "Cleric Robe",     "Robe de clerc"),
+    ("ARMOR_CLOTH_SET3",    "Mage Robe",       "Robe de mage"),
+    ("ARMOR_CLOTH_MORGANA", "Cultist Robe",    "Robe de cultiste"),
+    ("ARMOR_CLOTH_HELL",    "Fiend Robe",      "Robe du malfaisant"),
+    ("ARMOR_CLOTH_KEEPER",  "Druid Robe",      "Robe de druide"),
+    ("ARMOR_CLOTH_AVALON",  "Robe of Purity",  "Robe de pureté"),
+    ("ARMOR_CLOTH_ROYAL",   "Royal Robe",      "Robe royale"),
+]
+
+SHOES_CLOTH = [
+    ("SHOES_CLOTH_SET1",    "Scholar Sandals",   "Sandales de savant"),
+    ("SHOES_CLOTH_SET2",    "Cleric Sandals",    "Sandales de clerc"),
+    ("SHOES_CLOTH_SET3",    "Mage Sandals",      "Sandales de mage"),
+    ("SHOES_CLOTH_MORGANA", "Cultist Sandals",   "Sandales de cultiste"),
+    ("SHOES_CLOTH_HELL",    "Fiend Sandals",     "Sandales du malfaisant"),
+    ("SHOES_CLOTH_KEEPER",  "Druid Sandals",     "Sandales de druide"),
+    ("SHOES_CLOTH_AVALON",  "Sandals of Purity", "Sandales de pureté"),
+    ("SHOES_CLOTH_ROYAL",   "Royal Sandals",     "Sandales royales"),
+]
+
+# =========================
+# PLATE (plaque)
+# =========================
+HEAD_PLATE = [
+    ("HEAD_PLATE_SET1",   "Soldier Helmet",       "Casque de soldat"),
+    ("HEAD_PLATE_SET2",   "Knight Helmet",        "Casque de chevalier"),
+    ("HEAD_PLATE_SET3",   "Guardian Helmet",      "Casque de gardien"),
+    ("HEAD_PLATE_UNDEAD", "Graveguard Helmet",    "Casque de gardegoules"),
+    ("HEAD_PLATE_HELL",   "Demon Helmet",         "Casque de démon"),
+    ("HEAD_PLATE_AVALON", "Helmet of Valor",      "Casque de vaillance"),
+    ("HEAD_PLATE_ROYAL",  "Royal Helmet",         "Casque royal"),
+    ("HEAD_PLATE_FEY",    "Duskweaver Helmet",    "Casque tisserombre"),
+]
+
+ARMOR_PLATE = [
+    ("ARMOR_PLATE_SET1",   "Soldier Armor",       "Armure de soldat"),
+    ("ARMOR_PLATE_SET2",   "Knight Armor",        "Armure de chevalier"),
+    ("ARMOR_PLATE_SET3",   "Guardian Armor",      "Armure de gardien"),
+    ("ARMOR_PLATE_UNDEAD", "Graveguard Armor",    "Armure de gardegoules"),
+    ("ARMOR_PLATE_HELL",   "Demon Armor",         "Armure de démon"),
+    ("ARMOR_PLATE_AVALON", "Armor of Valor",      "Armure de vaillance"),
+    ("ARMOR_PLATE_ROYAL",  "Royal Armor",         "Armure royale"),
+    ("ARMOR_PLATE_FEY",    "Duskweaver Armor",    "Armure tisserombre"),
+]
+
+SHOES_PLATE = [
+    ("SHOES_PLATE_SET1",   "Soldier Boots",       "Bottes de soldat"),
+    ("SHOES_PLATE_SET2",   "Knight Boots",        "Bottes de chevalier"),
+    ("SHOES_PLATE_SET3",   "Guardian Boots",      "Bottes de gardien"),
+    ("SHOES_PLATE_UNDEAD", "Graveguard Boots",    "Bottes de gardegoules"),
+    ("SHOES_PLATE_HELL",   "Demon Boots",         "Bottes de démon"),
+    ("SHOES_PLATE_AVALON", "Boots of Valor",      "Bottes de vaillance"),
+    ("SHOES_PLATE_ROYAL",  "Royal Boots",         "Bottes royales"),
+    ("SHOES_PLATE_FEY",    "Duskweaver Boots",    "Bottes tisserombre"),
+]
+
+# ===========================================================
 # Familles d'armes (EN -> FR)
+# ===========================================================
+
 WEAPON_FAMILIES = {
     "bows":              "Arcs",
     "swords":            "Épées",
@@ -25,7 +151,10 @@ WEAPON_FAMILIES = {
     "nature_staffs":     "Bâton naturel",
 }
 
+# ===========================================================
 # Mains droites (off-hands)
+# ===========================================================
+
 OFFHAND_FAMILIES = {
     "offhands": "Mains droites (combattant torche, combattant tome, combattant bouclier)",
 }
@@ -293,7 +422,17 @@ class Reference(commands.Cog):
         self.bot = bot
 
     # ----- listes globales -----
+    # ---- familles d’équipements (vue d’ensemble) ----
+    @commands.command(name="list_equip", help="Liste des familles d’équipements (tête/armure/pieds × cuir/tissu/plaque).")
+    @only_market_channel()
+    async def list_equip(self, ctx: commands.Context):
+        e = discord.Embed(title="🧱 Familles d’équipements", color=discord.Color.green())
+        for fr, en in EQUIP_FAMILIES:
+            e.add_field(name=fr, value=en, inline=True)
+        e.set_footer(text="Utilise les commandes détaillées : ex. !list_head_leather, !list_armor_plate, !list_shoes_cloth …")
+        await ctx.send(embed=e)
 
+    
     @commands.command(name="list_armes", help="Liste des familles d’armes (EN → FR).")
     @only_market_channel()
     async def list_armes(self, ctx: commands.Context):
@@ -322,6 +461,43 @@ class Reference(commands.Cog):
         e.set_footer(text="Qualité 5 = Chef-d’œuvre (aussi appelé Formidable)")
         await ctx.send(embed=e)
 
+    # ---- listes détaillées équipements (9 commandes) ----
+    @commands.command(name="list_head_leather", help="Tête cuir : 8 lignes (token → EN / FR).")
+    @only_market_channel()
+    async def list_head_leather(self, ctx): await ctx.send(embed=_embed_pairs("🧢 Tête — Cuir", HEAD_LEATHER))
+
+    @commands.command(name="list_head_cloth", help="Tête tissu : 8 lignes (token → EN / FR).")
+    @only_market_channel()
+    async def list_head_cloth(self, ctx):  await ctx.send(embed=_embed_pairs("🧢 Tête — Tissu", HEAD_CLOTH))
+
+    @commands.command(name="list_head_plate", help="Tête plaque : 8 lignes (token → EN / FR).")
+    @only_market_channel()
+    async def list_head_plate(self, ctx):  await ctx.send(embed=_embed_pairs("🧢 Tête — Plaque", HEAD_PLATE))
+
+    @commands.command(name="list_armor_leather", help="Armure cuir : 8 lignes (token → EN / FR).")
+    @only_market_channel()
+    async def list_armor_leather(self, ctx): await ctx.send(embed=_embed_pairs("🧥 Armure — Cuir", ARMOR_LEATHER))
+
+    @commands.command(name="list_armor_cloth", help="Armure tissu : 8 lignes (token → EN / FR).")
+    @only_market_channel()
+    async def list_armor_cloth(self, ctx):  await ctx.send(embed=_embed_pairs("🧥 Armure — Tissu", ARMOR_CLOTH))
+
+    @commands.command(name="list_armor_plate", help="Armure plaque : 8 lignes (token → EN / FR).")
+    @only_market_channel()
+    async def list_armor_plate(self, ctx):  await ctx.send(embed=_embed_pairs("🧥 Armure — Plaque", ARMOR_PLATE))
+
+    @commands.command(name="list_shoes_leather", help="Pieds cuir : 8 lignes (token → EN / FR).")
+    @only_market_channel()
+    async def list_shoes_leather(self, ctx): await ctx.send(embed=_embed_pairs("🥾 Pieds — Cuir", SHOES_LEATHER))
+
+    @commands.command(name="list_shoes_cloth", help="Pieds tissu : 8 lignes (token → EN / FR).")
+    @only_market_channel()
+    async def list_shoes_cloth(self, ctx):  await ctx.send(embed=_embed_pairs("🥾 Pieds — Tissu", SHOES_CLOTH))
+
+    @commands.command(name="list_shoes_plate", help="Pieds plaque : 8 lignes (token → EN / FR).")
+    @only_market_channel()
+    async def list_shoes_plate(self, ctx):  await ctx.send(embed=_embed_pairs("🥾 Pieds — Plaque", SHOES_PLATE))
+    
     # ----- armes : commandes détaillées -----
 
     @commands.command(name="list_bow", help="Arcs : token → EN / FR.")
